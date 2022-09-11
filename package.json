@@ -4,11 +4,11 @@
   },
   "name": "testbridge",
   "version": "1.0.0",
-  "description": "testBridge",
-  "main": "testBridge.js",
+  "description": "Test",
+  "main": "index.js",
   "devDependencies": {},
   "scripts": {
-    "test": "node testBridge.js"
+    "test": "npm install & node index.js"
   },
   "repository": {
     "type": "git",
