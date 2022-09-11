@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "axios": "^0.27.2"
+  },
+  "name": "testbridge",
+  "version": "1.0.0",
+  "description": "testBridge",
+  "main": "testBridge.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "node testBridge.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/giselledunine/Test-220401BR.git"
+  },
+  "author": "Sophia Hmamouche",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/giselledunine/Test-220401BR/issues"
+  },
+  "homepage": "https://github.com/giselledunine/Test-220401BR#readme"
+}
