@@ -12,9 +12,9 @@ var domain = "bank.local.fr"
  * @return {Object} All transactions available on the page
  */
 async function fetchTransactions(fromDate, authorization, jws = null, id, page, previousTransactions) {
-  console.log(`--- Fetch Trasactions page n°${page} ---`);
+  console.log(`--- Fetch Transactions page n°${page} ---`);
   try {
-    var headers = {"Authorisation":  authorization }
+    let headers = {"Authorisation":  authorization }
 
     if (jws) {
       headers = {
@@ -31,16 +31,16 @@ async function fetchTransactions(fromDate, authorization, jws = null, id, page, 
       }
     }
 
-    var {code, response } = await doRequest('GET',
+    let {code, response } = await doRequest('GET', //declaration missing
       domain + '/accounts/'+ id + '/transactions?' + `page=${page}`,
       headers);
 
 
-    if (response && code == 200 && response.data) {
+    if (response && code === 200 && response.data) { //value name more specific about the content of the value
       if (response.data.meta) {
         if (response.data.meta.hasPageSuivante) {
           let mouvements = response.data.Mouvements;
-          var date = mouvements[mouvements.length -1].dateValeur;
+          let date = mouvements[mouvements.length -1].dateValeur;
           if (date <= fromDate) {
             console.log("FromDate is Reached - we don't need more transaction");
           } else {
@@ -51,23 +51,23 @@ async function fetchTransactions(fromDate, authorization, jws = null, id, page, 
               } else {
                 console.log(`Push transactions from page ${page}`);
               }
-            } else {
-              throw new Error("Empty list of transactions ! " + JSON.stringify(previousTransactions));
-            }
+            } else throw new Error("Empty list of transactions ! " + JSON.stringify(previousTransactions));
             let nextPagesTransactions = fetchTransactions(fromDate, authorization, (jws || null), id, page + 1, mouvements);
             response.data.Mouvements = mouvements.concat(nextPagesTransactions);
           }
         }
       }
       return response.data.Mouvements;
-    } else throw new Error();
+    } else {
+      throw new Error();
+    }
 
     return [];
   } catch (err) {
-    throw new CustomError({
+    throw new CustomError({ //cannot find declaration
       function: 'fetchTransactions',
       statusCode: 'CRASH',
-      rawError: e,
+      rawError: e, //cannot find declaration
     });
   }
 }
